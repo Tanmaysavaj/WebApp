@@ -1,0 +1,27 @@
+{
+  "name": "assi_2",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "tanmay savaj",
+  "license": "ISC",
+  "description": "assignment_2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tanmaysavaj/Web_322.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tanmaysavaj/Web_322/issues"
+  },
+  "homepage": "https://github.com/Tanmaysavaj/Web_322#readme",
+  "keywords": [
+    "asi_2"
+  ],
+  "dependencies": {
+    "express": "^4.21.2",
+    "vercel": "^28.18.5"
+  }
+}
