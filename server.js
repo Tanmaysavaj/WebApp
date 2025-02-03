@@ -26,7 +26,7 @@ projectData.initialize()
 
 // Define Routes
 app.get("/", (req, res) => {
-    res.send("Assignment 2: Tanmay Dineshbhai Savaj - 131573230");
+    res.send("Assignment 2: Tanmay Dineshbhai Savaj - 131573230(tdsavaj@myseneca.ca)");
 });
 
 app.get("/solutions/projects", async (req, res) => {
