@@ -12,7 +12,7 @@
 ********************************************************************************/
 
 const express = require("express");
-const projectData = require("./modules/projects");  
+const projectData = require("./modules/projects.js");  
 
 const app = express();
 const PORT = process.env.PORT || 3000;
