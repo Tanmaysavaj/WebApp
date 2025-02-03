@@ -14,7 +14,7 @@
   ],
   "functions": {
     "server.js": {
-      "includeFiles": ["data/projectData.json", "data/sectorData.json"]
+     "includeFiles": "data/*"
     }
   }
 }
