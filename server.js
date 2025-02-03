@@ -17,46 +17,33 @@ const projectData = require("./Modules/projects");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Initialize project data
 projectData.initialize()
-    .then(() => console.log("Project Data Initialized"))
-    .catch(err => console.error(err));
+    .then(() => {
+        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    })
+    .catch(err => {
+        console.error(err);
+    });
 
-// Define Routes
 app.get("/", (req, res) => {
     res.send("Assignment 2: Tanmay Dineshbhai Savaj - 131573230");
 });
 
-app.get("/solutions/projects", async (req, res) => {
-    try {
-        const data = await projectData.getAllProjects();
-        res.json(data);
-    } catch (err) {
-        res.status(500).send(err);
-    }
+app.get("/solutions/projects", (req, res) => {
+    projectData.getAllProjects()
+        .then(data => res.json(data))
+        .catch(err => res.status(500).send(err));
 });
 
-app.get("/solutions/projects/id-demo", async (req, res) => {
-    try {
-        const data = await projectData.getProjectById(7);
-        res.json(data);
-    } catch (err) {
-        res.status(404).send(err);
-    }
+app.get("/solutions/projects/id-demo", (req, res) => {
+    projectData.getProjectById(7)
+        .then(data => res.json(data))
+        .catch(err => res.status(404).send(err));
 });
 
-app.get("/solutions/projects/sector-demo", async (req, res) => {
-    try {
-        const data = await projectData.getProjectsBySector("agriculture");
-        res.json(data);
-    } catch (err) {
-        res.status(404).send(err);
-    }
+app.get("/solutions/projects/sector-demo", (req, res) => {
+    projectData.getProjectsBySector("agriculture")
+        .then(data => res.json(data))
+        .catch(err => res.status(404).send(err));
 });
 
-if (require.main === module) {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-}
-
-//  Export app for Vercel
-module.exports = app;
