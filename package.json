@@ -1,33 +1,39 @@
 {
   "name": "assi_2",
   "version": "1.0.0",
+  "description": "Assignment 3 for WEB322",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "tailwindcss build src/styles.css -o public/styles.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "tanmay savaj",
+  "author": "Tanmay Savaj",
   "license": "ISC",
-  "description": "assignment_2",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tanmaysavaj/Web_322.git"
+    "url": "https://github.com/Tanmaysavaj/Web_322.git"
   },
   "bugs": {
     "url": "https://github.com/Tanmaysavaj/Web_322/issues"
   },
   "homepage": "https://github.com/Tanmaysavaj/Web_322#readme",
   "keywords": [
-    "assi_2"
+    "assignment",
+    "web322",
+    "express",
+    "tailwindcss"
   ],
   "dependencies": {
-    "express": "^4.21.2",
-    "vercel": "^28.18.5"
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.14",
     "daisyui": "^4.12.23",
     "tailwindcss": "^3.4.17"
+  },
+  "engines": {
+    "node": ">=14.x"
   }
 }
