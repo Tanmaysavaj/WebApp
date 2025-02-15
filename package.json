@@ -12,7 +12,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tanmaysavaj/Web_322.git"
+    "url": "git+https://github.com/Tanmaysavaj/Web_322.git"
   },
   "bugs": {
     "url": "https://github.com/Tanmaysavaj/Web_322/issues"
