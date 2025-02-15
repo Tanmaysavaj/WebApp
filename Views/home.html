@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Solutions</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="bg-gray-100">
+    <nav class="navbar bg-base-200">
+        <div class="flex-1">
+            <a href="/" class="btn btn-ghost text-xl">Climate Solutions</a>
+        </div>
+        <div class="flex-none">
+            <a href="/about" class="btn btn-ghost">About</a>
+            <details class="dropdown">
+                <summary class="btn btn-ghost">Sector</summary>
+                <ul class="dropdown-content menu shadow bg-base-100 rounded-box">
+                    <li><a href="/solutions/projects?sector=Land Sinks">Land Sinks</a></li>
+                    <li><a href="/solutions/projects?sector=Industry">Industry</a></li>
+                    <li><a href="/solutions/projects?sector=Transportation">Transportation</a></li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+
+    <main class="container mx-auto my-8">
+        <section class="hero bg-base-200 p-6 rounded-lg">
+            <h1 class="text-3xl font-bold">Explore Our Climate Solutions</h1>
+            <p>Discover projects that help combat climate change.</p>
+            <a href="/solutions/projects" class="btn btn-primary mt-4">View Projects</a>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_farmlandrestoration01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Abandoned Farmland Restoration</h2>
+                <p>Restoring degraded farmland to boost food security.</p>
+                <a href="/solutions/projects/1" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_alternativecement02.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Alternative Cement</h2>
+                <p>Reducing emissions from cement production.</p>
+                <a href="/solutions/projects/2" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_bicycle_infrastructure.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Bicycle Infrastructure</h2>
+                <p>Encouraging cycling to reduce fossil fuel use.</p>
+                <a href="/solutions/projects/3" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
