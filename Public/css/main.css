@@ -948,6 +948,7 @@ html {
 .dropdown {
   position: relative;
   display: inline-block;
+  z-index: 10;
 }
 
 .dropdown > *:not(summary):focus {
