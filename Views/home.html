@@ -7,52 +7,275 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body class="bg-gray-100">
-    <nav class="navbar bg-base-200">
-        <div class="flex-1">
-            <a href="/" class="btn btn-ghost text-xl">Climate Solutions</a>
-        </div>
-        <div class="flex-none">
-            <a href="/about" class="btn btn-ghost">About</a>
-            <details class="dropdown">
-                <summary class="btn btn-ghost">Sector</summary>
-                <ul class="dropdown-content menu shadow bg-base-100 rounded-box">
-                    <li><a href="/solutions/projects?sector=Land Sinks">Land Sinks</a></li>
-                    <li><a href="/solutions/projects?sector=Industry">Industry</a></li>
-                    <li><a href="/solutions/projects?sector=Transportation">Transportation</a></li>
-                </ul>
-            </details>
+    <nav class="navbar bg-base-200 p-4">
+        <div class="flex justify-between items-center container mx-auto">
+            <a href="/" class="text-xl font-bold">Climate Solutions</a>
+            <div class="flex items-center space-x-6">
+                <a href="/about" class="btn btn-ghost">About</a>
+                <details class="dropdown">
+                    <summary class="btn btn-ghost">Sector</summary>
+                    <ul class="dropdown-content menu shadow bg-base-100 rounded-box">
+                        <li><a href="/solutions/projects?sector=Land Sinks">Land Sinks</a></li>
+                        <li><a href="/solutions/projects?sector=Industry">Industry</a></li>
+                        <li><a href="/solutions/projects?sector=Transportation">Transportation</a></li>
+                        <li><a href="/solutions/projects?sector=Electricity">Electricity</a></li>
+                        <li><a href="/solutions/projects?sector=Food, Agriculture, and Land Use">Food, Agriculture, and Land Use</a></li>
+                    </ul>
+                </details>
+            </div>
         </div>
     </nav>
 
     <main class="container mx-auto my-8">
-        <section class="hero bg-base-200 p-6 rounded-lg">
-            <h1 class="text-3xl font-bold">Explore Our Climate Solutions</h1>
-            <p>Discover projects that help combat climate change.</p>
-            <a href="/solutions/projects" class="btn btn-primary mt-4">View Projects</a>
+        <section class=" bg-base-200 p-10 rounded-lg text-left relative" style="text-align: center;">
+            <div class="max-w-xl">
+                <h1 class="text-4xl font-bold mb-2">Explore Our Climate Solutions</h1>
+                <p class="text-lg mb-6">Discover projects that help combat climate change.</p>
+            </div>
+            <a href="/solutions/projects" class="btn btn-primary absolute bottom-4 right-4">View Projects</a>
         </section>
 
         <section class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+            <!-- Card 1 -->
             <div class="card bg-white p-4 shadow-lg">
                 <img src="https://drawdown.org/sites/default/files/solutions/solution_farmlandrestoration01.jpg" class="w-full rounded">
                 <h2 class="text-xl font-semibold mt-2">Abandoned Farmland Restoration</h2>
                 <p>Restoring degraded farmland to boost food security.</p>
                 <a href="/solutions/projects/1" class="btn btn-secondary mt-4">Learn More</a>
             </div>
-
+        
+            <!-- Card 2 -->
             <div class="card bg-white p-4 shadow-lg">
                 <img src="https://drawdown.org/sites/default/files/solutions2020/solution_alternativecement02.jpg" class="w-full rounded">
                 <h2 class="text-xl font-semibold mt-2">Alternative Cement</h2>
                 <p>Reducing emissions from cement production.</p>
                 <a href="/solutions/projects/2" class="btn btn-secondary mt-4">Learn More</a>
             </div>
-
+        
+            <!-- Card 3 -->
             <div class="card bg-white p-4 shadow-lg">
                 <img src="https://drawdown.org/sites/default/files/solutions2020/solution_bicycle_infrastructure.jpg" class="w-full rounded">
                 <h2 class="text-xl font-semibold mt-2">Bicycle Infrastructure</h2>
                 <p>Encouraging cycling to reduce fossil fuel use.</p>
                 <a href="/solutions/projects/3" class="btn btn-secondary mt-4">Learn More</a>
             </div>
+        
+            <!-- Card 4 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_biomass01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Biomass Power</h2>
+                <p>Biomass feedstock can replace fossil fuels for generating heat and electricity.</p>
+                <a href="/solutions/projects/4" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 5 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_farmlandirrigation01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Farm Irrigation Efficiency</h2>
+                <p>Drip and sprinkler irrigation make farm water use less energy-intensive.</p>
+                <a href="/solutions/projects/5" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 6 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/Solution_Bamboo01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Bamboo Production</h2>
+                <p>Bamboo rapidly sequesters carbon in biomass and soil.</p>
+                <a href="/solutions/projects/6" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 7 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_bioplastics02.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Bioplastics</h2>
+                <p>Bioplastics utilize plants as an alternative source of carbon.</p>
+                <a href="/solutions/projects/7" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 8 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_carpooling.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Carpooling</h2>
+                <p>Sharing rides reduces greenhouse gas emissions per traveler.</p>
+                <a href="/solutions/projects/8" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 9 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_concentratedsolar01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Concentrated Solar Power</h2>
+                <p>Uses sunlight as a heat source to produce electricity without pollution.</p>
+                <a href="/solutions/projects/9" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 10 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/2-iStock-1146294272.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Improved Aquaculture</h2>
+                <p>Ensuring part of the on-site energy consumption is based on renewable resources.</p>
+                <a href="/solutions/projects/10" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 11 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_managedgrazing01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Managed Grazing</h2>
+                <p>Improves the health of grassland soils, sequestering carbon.</p>
+                <a href="/solutions/projects/11" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 12 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_composting01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Composting</h2>
+                <p>Converts organic waste into soil carbon, averting landfill methane emissions.</p>
+                <a href="/solutions/projects/12" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 13 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/airplanes-web.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Efficient Aviation</h2>
+                <p>Technologies and practices that can lower airplane emissions.</p>
+                <a href="/solutions/projects/13" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 14 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_distributedenergystorage01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Distributed Energy Storage</h2>
+                <p>Standalone batteries and electric vehicles store energy.</p>
+                <a href="/solutions/projects/14" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 15 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solutions_improvedcattlefeed02.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Improved Cattle Feed</h2>
+                <p>Optimizing cattle feeding strategies can lower methane emissions.</p>
+                <a href="/solutions/projects/15" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 16 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_managedgrazing01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Managed Grazing</h2>
+                <p>Managed grazing involves carefully controlling livestock density.</p>
+                <a href="/solutions/projects/16" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 17 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_recycledmetals_0.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Recycled Metals</h2>
+                <p>Metals are extracted from nonrenewable ores.</p>
+                <a href="/solutions/projects/17" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 18 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_ships01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Efficient Ocean Shipping</h2>
+                <p>Fuel-saving ship design, technologies, and practices can trim emissions.</p>
+                <a href="/solutions/projects/18" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 19 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_rooftopsolar02.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Distributed Solar Photovoltaics</h2>
+                <p>Rooftop solar panels offer hyper-local, clean electricity generation.</p>
+                <a href="/solutions/projects/19" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 20 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_improvedmanuremanagement.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Improved Manure Management</h2>
+                <p>Advanced technologies for managing manure can reduce climate impact.</p>
+                <a href="/solutions/projects/20" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 21 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_multistrataagroforestry01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Multistrata Agroforestry</h2>
+                <p>Multistrata agroforestry systems mimic the structure of natural forests.</p>
+                <a href="/solutions/projects/21" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 22 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_recycledpaper01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Recycled Paper</h2>
+                <p>Reprocessing used paper curtails extraction of virgin feedstock.</p>
+                <a href="/solutions/projects/22" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 23 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_trucks01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Efficient Trucks</h2>
+                <p>Fuel efficiency is critical to reduce truck emissions.</p>
+                <a href="/solutions/projects/23" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 24 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_geothermal01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Geothermal Power</h2>
+                <p>Steamy hot water from underground reservoirs is the fuel for geothermal power.</p>
+                <a href="/solutions/projects/24" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 25 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_nutrientmanagement02.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Nutrient Management</h2>
+                <p>More judicious use of fertilizers can curb emissions.</p>
+                <a href="/solutions/projects/25" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 26 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions/solution_perennialbiomass01.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Perennial Biomass Production</h2>
+                <p>Perennial plants are a more sustainable source and sequester carbon.</p>
+                <a href="/solutions/projects/26" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 27 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_recycledplastics.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Recycled Plastics</h2>
+                <p>Recycling plastics requires less energy than producing new materials.</p>
+                <a href="/solutions/projects/27" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 28 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_electric_bicycles.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Electric Bicycles</h2>
+                <p>Battery-powered motors can boost the use of bicycles.</p>
+                <a href="/solutions/projects/28" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 29 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_grid_flexibility.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Grid Flexibility</h2>
+                <p>Smarter, more flexible electric grids can cut energy losses.</p>
+                <a href="/solutions/projects/29" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
+        
+            <!-- Card 30 -->
+            <div class="card bg-white p-4 shadow-lg">
+                <img src="https://drawdown.org/sites/default/files/solutions2020/solution_seafloorprotection.jpg" class="w-full rounded">
+                <h2 class="text-xl font-semibold mt-2">Seafloor Protection</h2>
+                <p>Bottom-trawling bans can protect important carbon sinks.</p>
+                <a href="/solutions/projects/30" class="btn btn-secondary mt-4">Learn More</a>
+            </div>
         </section>
-    </main>
+</main>
 </body>
 </html>
