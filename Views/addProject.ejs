@@ -1,55 +1,55 @@
 <%- include('partials/navbar', { page: '/solutions/addProject' }) %>
 
-<div class="container mt-5">
-    <div class="card shadow-lg p-4">
-        <h2 class="text-center text-primary mb-4">Add Project</h2>
+<div class="container" style="max-width: 100%; padding: 20px;">
+    <div style="text-align: center; margin-bottom: 25px;">
+        <h4>Add a new Project to the collection</h4>
+    </div>
 
-        <form action="/solutions/addProject" method="POST">
-
-            <div class="mb-3">
-                <label for="title" class="form-label">Project Title:</label>
-                <input type="text" class="form-control" id="title" name="title" required>
+    <form action="/solutions/addProject" method="POST">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+                <label style="display: block; margin-bottom: 8px;">Title</label>
+                <input type="text" id="title" name="title" required style="width: 100%; padding: 8px;">
             </div>
 
-            <div class="mb-3">
-                <label for="feature_img_url" class="form-label">Feature Image URL:</label>
-                <input type="url" class="form-control" id="feature_img_url" name="feature_img_url" required>
+            <div>
+                <label style="display: block; margin-bottom: 8px;">Feature Image URL</label>
+                <input type="url" id="feature_img_url" name="feature_img_url" required style="width: 100%; padding: 8px;">
             </div>
 
-            <div class="mb-3">
-                <label for="sector_id" class="form-label">Sector:</label>
-                <select class="form-select" id="sector_id" name="sector_id" required>
+            <div>
+                <label style="display: block; margin-bottom: 8px;">Sector</label>
+                <select id="sector_id" name="sector_id" required style="width: 100%; padding: 8px;">
                     <option value="">-- Select a Sector --</option>
                     <% sectors.forEach(sector => { %>
                         <option value="<%= sector.id %>"><%= sector.sector_name %></option>
                     <% }) %>
                 </select>
             </div>
-
-            <div class="mb-3">
-                <label for="intro_short" class="form-label">Intro Short:</label>
-                <textarea class="form-control" id="intro_short" name="intro_short" rows="2" required></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+                <label style="display: block; margin-bottom: 8px;">Intro</label>
+                <textarea id="intro_short" name="intro_short" rows="6" required style="width: 100%; padding: 8px; resize: vertical;"></textarea>
             </div>
 
-            <div class="mb-3">
-                <label for="summary_short" class="form-label">Summary Short:</label>
-                <textarea class="form-control" id="summary_short" name="summary_short" rows="3" required></textarea>
+            <div>
+                <label style="display: block; margin-bottom: 8px;">Short Summary</label>
+                <textarea id="summary_short" name="summary_short" rows="6" required style="width: 100%; padding: 8px; resize: vertical;"></textarea>
             </div>
 
-            <div class="mb-3">
-                <label for="impact" class="form-label">Impact:</label>
-                <textarea class="form-control" id="impact" name="impact" rows="3" required></textarea>
+            <div>
+                <label style="display: block; margin-bottom: 8px;">Impact</label>
+                <textarea id="impact" name="impact" rows="6" required style="width: 100%; padding: 8px; resize: vertical;"></textarea>
             </div>
-
-            <div class="mb-3">
-                <label for="original_source_url" class="form-label">Original Source URL:</label>
-                <input type="url" class="form-control" id="original_source_url" name="original_source_url" required>
-            </div>
-
-            <div class="d-flex justify-content-between">
-                <a href="/solutions/projects" class="btn btn-secondary">Cancel</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </div>
+        </div>
+        <div style="margin-bottom: 30px;">
+            <label style="display: block; margin-bottom: 8px;">Original Source URL</label>
+            <input type="url" id="original_source_url" name="original_source_url" required style="width: 100%; padding: 8px;">
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="/solutions/projects" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
 </div>
