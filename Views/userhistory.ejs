@@ -1,0 +1,24 @@
+<%- include('Partials/navbar') %>
+
+<div class="p-4 max-w-3xl mx-auto mt-8">
+  <h2 class="text-xl font-bold mb-4">User History</h2>
+  <p><strong>Username:</strong> <%= session.user.userName %></p>
+  <p><strong>Email:</strong> <%= session.user.email %></p>
+
+  <table class="w-full mt-4 border">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="border p-2">Login Date/Time</th>
+        <th class="border p-2">Client Info</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% session.user.loginHistory.forEach(login => { %>
+        <tr>
+          <td class="border p-2"><%= login.dateTime.toString() %></td>
+          <td class="border p-2"><%= login.userAgent %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>

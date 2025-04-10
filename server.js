@@ -1,18 +1,21 @@
-/******************************************************************************** 
-*  WEB322 – Assignment 05
+/********************************************************************************
+*  WEB322 – Assignment 06
 *  
-*  I declare that this assignment is my own work in accordance with Seneca's 
-*  Academic Integrity Policy: 
+*  I declare that this assignment is my own work in accordance with Seneca's
+*  Academic Integrity Policy:
 *  
-*  https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html 
+*  https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *  
-*  Name: Tanmay Dineshbhai Savaj 
-*  Student ID: 131573230 
-*  Date: 20 March 2025
+*  Name: Tanmay Dineshbhai Savaj
+*  Student ID: 131573230
+*  Date: 7 April 2025
 ********************************************************************************/
 
 const express = require("express");
 const path = require("path");
+const clientSessions = require("client-sessions");
+require("dotenv").config();
+
 const {
     getAllProjects,
     getProjectsBySector,
@@ -22,7 +25,9 @@ const {
     editProject,
     deleteProject,
     initialize
-} = require("./Modules/projects.js");
+} = require("./Modules/projects");
+
+const authData = require("./Modules/auth-service");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,17 +38,35 @@ app.set("views", path.join(__dirname, "Views"));
 app.use(express.static(path.join(__dirname, "Public")));
 app.use(express.urlencoded({ extended: true }));
 
-initialize()
-    .then(() => console.log("Project Data Initialized"))
-    .catch(err => console.error("Initialization failed:", err));
+// Session configuration
+app.use(clientSessions({
+    cookieName: "session",
+    secret: process.env.SESSION_SECRET,
+    duration: 2 * 60 * 1000,        
+    activeDuration: 1000 * 60       
+}));
 
+// Expose session to all views
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
+
+// Login check middleware
+function ensureLogin(req, res, next) {
+    if (!req.session.user) {
+        return res.redirect("/login");
+    }
+    next();
+}
+
+// Homepage
 app.get("/", async (req, res) => {
     try {
         const allProjects = await getAllProjects();
         const projects = allProjects.slice(0, 9);
         res.render("home", { projects, page: "/" });
     } catch (err) {
-        console.error("Error loading home page:", err);
         res.status(500).render("500", { message: "Error loading home page" });
     }
 });
@@ -65,7 +88,6 @@ app.get("/solutions/projects", async (req, res) => {
         }
         res.render("projects", { projects, page: "/solutions/projects" });
     } catch (err) {
-        console.error("Error loading projects:", err);
         res.status(500).render("500", { message: "Error loading projects" });
     }
 });
@@ -78,102 +100,121 @@ app.get("/solutions/projects/:id", async (req, res) => {
         }
         res.render("project", { project, page: "" });
     } catch (err) {
-        console.error("Error loading project:", err);
         res.status(500).render("500", { message: "Error loading project" });
     }
 });
 
-app.get("/solutions/addProject", async (req, res) => {
+// --- Protected routes ---
+app.get("/solutions/addProject", ensureLogin, async (req, res) => {
     try {
         const sectors = await getAllSectors();
         res.render("addProject", { sectors, page: "/solutions/addProject" });
     } catch (err) {
-        console.error("Error loading add project form:", err);
-        res.status(500).render("500", { message: `Error loading sectors: ${err.message}` });
+        res.status(500).render("500", { message: "Error loading form" });
     }
 });
 
-app.post("/solutions/addProject", async (req, res) => {
+app.post("/solutions/addProject", ensureLogin, async (req, res) => {
     try {
-        console.log("Form submitted with:", req.body);
-
-        // Validate required fields
-        if (!req.body.title || !req.body.sector_id) {
-            throw new Error("Title and sector are required.");
-        }
-
         await addProject(req.body);
-        res.redirect("/solutions/projects");  // Redirect to projects page
-    } catch (error) {
-        console.error("Error adding project:", error);
-        res.status(500).render("500", { error: error.message });
+        res.redirect("/solutions/projects");
+    } catch (err) {
+        res.status(500).render("500", { message: err.message });
     }
 });
 
-
-
-app.get("/solutions/editProject/:id", async (req, res) => {
+app.get("/solutions/editProject/:id", ensureLogin, async (req, res) => {
     try {
-        const projectId = parseInt(req.params.id);
-        if (isNaN(projectId)) throw new Error("Invalid project ID");
-
-        const project = await getProjectById(projectId);
-        if (!project) {
-            return res.status(404).render("404", { message: "Project not found." });
-        }
-
+        const project = await getProjectById(parseInt(req.params.id));
         const sectors = await getAllSectors();
         res.render("editProject", { project, sectors, page: "/solutions/editProject" });
     } catch (err) {
-        console.error("Error loading edit project form:", err);
-        res.status(500).render("500", { message: `Error loading edit form: ${err.message}` });
+        res.status(500).render("500", { message: err.message });
     }
 });
 
-app.post("/solutions/editProject/:id", async (req, res) => {
+app.post("/solutions/editProject/:id", ensureLogin, async (req, res) => {
     try {
         const projectId = parseInt(req.params.id);
-        if (isNaN(projectId)) throw new Error("Invalid project ID");
-
         const success = await editProject(projectId, req.body);
         if (!success) {
-            return res.status(404).render("404", { message: "Project update failed. Project not found." });
+            return res.status(404).render("404", { message: "Project update failed" });
         }
-
         res.redirect("/solutions/projects");
     } catch (err) {
-        console.error("Error updating project:", err);
-        res.status(500).render("500", { message: `Error updating project: ${err.message}` });
+        res.status(500).render("500", { message: err.message });
     }
 });
 
-app.get("/solutions/deleteProject/:id", async (req, res) => {
+app.get("/solutions/deleteProject/:id", ensureLogin, async (req, res) => {
     try {
-        const projectId = parseInt(req.params.id);
-        if (isNaN(projectId)) throw new Error("Invalid project ID");
-
-        await deleteProject(projectId);
+        await deleteProject(parseInt(req.params.id));
         res.redirect("/solutions/projects");
     } catch (err) {
-        console.error("Error deleting project:", err);
-        res.status(500).render("500", { message: `Error deleting project: ${err.message}` });
+        res.status(500).render("500", { message: err.message });
     }
 });
 
-// 404 Error Handler (Handles Not Found Pages)
+// --- Auth Routes ---
+
+app.get("/register", (req, res) => {
+    res.render("register", { errorMessage: "", successMessage: "", userName: "", page: "/register" });
+});
+
+app.post("/register", (req, res) => {
+    authData.registerUser(req.body).then(() => {
+        res.render("register", { successMessage: "User created", errorMessage: "", userName: "", page: "/register" });
+    }).catch(err => {
+        res.render("register", { errorMessage: err, successMessage: "", userName: req.body.userName, page: "/register" });
+    });
+});
+
+app.get("/login", (req, res) => {
+    res.render("login", { errorMessage: "", userName: "", page: "/login" });
+});
+
+app.post("/login", (req, res) => {
+    req.body.userAgent = req.get("User-Agent");
+
+    authData.checkUser(req.body).then(user => {
+        req.session.user = {
+            userName: user.userName,
+            email: user.email,
+            loginHistory: user.loginHistory
+        };
+        res.redirect("/solutions/projects");
+    }).catch(err => {
+        res.render("login", { errorMessage: err, userName: req.body.userName, page: "/login" });
+    });
+});
+
+app.get("/logout", (req, res) => {
+    req.session.reset();
+    res.redirect("/");
+});
+
+app.get("/userHistory", ensureLogin, (req, res) => {
+    res.render("userHistory", { page: "/userHistory" });
+});
+
+// --- Error handlers ---
 app.use((req, res) => {
-    res.status(404).render("404", { message: "Page not found.", page: "/" });
+    res.status(404).render("404", { message: "Page not found", page: "/" });
 });
 
-// 500 Error Handler (Handles Internal Server Errors)
 app.use((err, req, res, next) => {
-    console.error("Server error:", err.stack);
-    res.status(500).render("500", { message: err.message || "Something went wrong!" });
+    console.error(err.stack);
+    res.status(500).render("500", { message: err.message || "Something went wrong", page: "/" });
 });
 
-
-if (require.main === module) {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-}
+// --- Start Server ---
+initialize()
+    .then(authData.initialize)
+    .then(() => {
+        app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+    })
+    .catch(err => {
+        console.error("Unable to start server:", err);
+    });
 
 module.exports = app;

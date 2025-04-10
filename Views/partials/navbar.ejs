@@ -3,14 +3,30 @@
         <a href="/" class="text-2xl font-bold text-white">Climate Solutions</a>
         <ul style="display: flex; gap: 2rem; list-style: none; padding: 0; margin: 0;">
             <li>
-                <a href="/solutions/projects" class="<%= (typeof page !== 'undefined' && page === '/solutions/projects') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">View Projects</a>
+                <a href="/solutions/projects" class="<%= (page === '/solutions/projects') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">View Projects</a>
             </li>
             <li>
-                <a href="/about" class="<%= (typeof page !== 'undefined' && page === '/about') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">About</a>
+                <a href="/about" class="<%= (page === '/about') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">About</a>
             </li>
-            <li>
-                <a href="/solutions/addProject" class="<%= (typeof page !== 'undefined' && page === '/solutions/addProject') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">Add Project</a>
-            </li>
+
+            <% if (session && session.user) { %>
+                <li>
+                    <a href="/solutions/addProject" class="<%= (page === '/solutions/addProject') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">Add Project</a>
+                </li>
+                <li>
+                    <a href="/userHistory" class="<%= (page === '/userHistory') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">User History</a>
+                </li>
+                <li>
+                    <a href="/logout" class="text-white hover:text-green-400">Logout</a>
+                </li>
+            <% } else { %>
+                <li>
+                    <a href="/login" class="<%= (page === '/login') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">Login</a>
+                </li>
+                <li>
+                    <a href="/register" class="<%= (page === '/register') ? 'font-bold text-green-400' : 'text-white' %> hover:text-green-400">Register</a>
+                </li>
+            <% } %>
         </ul>
     </div>
 </nav>
