@@ -28,9 +28,10 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "client-sessions": "^0.8.0",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "helmet": "^8.1.0",
     "mongoose": "^8.13.2",
     "pg": "^8.14.1",
     "pg-hstore": "^2.3.4",
