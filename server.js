@@ -38,7 +38,7 @@ app.set("views", path.join(__dirname, "Views"));
 app.use(express.static(path.join(__dirname, "Public")));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
+app.use(clientSessions({
     cookieName: 'session',
     secret: process.env.SESSION_SECRET, 
     duration: 24 * 60 * 60 * 1000,

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Assignment 3 for WEB322",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "tw:build": "tailwindcss build -i ./public/css/tailwind.css -o ./public/css/main.css",
