@@ -25,71 +25,70 @@ module.exports.initialize = () => {
     });
 };
 
-module.exports.registerUser = (userData) => {
-    return new Promise((resolve, reject) => {
-        if (userData.password !== userData.password2) {
-            reject("Passwords do not match");
-            return;
-        }
+module.exports.registerUser = async (userData) => {
+    if (userData.password !== userData.password2) {
+        throw "Passwords do not match";
+    }
 
-        bcrypt.hash(userData.password, 10).then(hash => {
-            let newUser = new User({
-                userName: userData.userName,
-                password: hash,
-                email: userData.email,
-                loginHistory: []
-            });
+    try {
+        const hash = await bcrypt.hash(userData.password, 10);
 
-            newUser.save().then(() => resolve()).catch(err => {
-                if (err.code === 11000) {
-                    reject("User Name already taken");
-                } else {
-                    reject("There was an error creating the user: " + err);
-                }
-            });
-        }).catch(() => {
-            reject("There was an error encrypting the password");
+        const newUser = new User({
+            userName: userData.userName,
+            password: hash,
+            email: userData.email,
+            loginHistory: []
         });
-    });
+
+        await newUser.save();
+    } catch (err) {
+        console.error("Error during registration:", err);
+        if (err.code === 11000) {
+            throw "User Name already taken";
+        } else if (err.message && err.message.includes("hash")) {
+            throw "There was an error encrypting the password";
+        } else {
+            throw "There was an error creating the user: " + err;
+        }
+    }
 };
 
-module.exports.checkUser = (userData) => {
-    return new Promise((resolve, reject) => {
-        User.find({ userName: userData.userName }).then(users => {
-            if (users.length === 0) {
-                reject(`Unable to find user: ${userData.userName}`);
-                return;
-            }
+module.exports.checkUser = async (userData) => {
+    try {
+        const users = await User.find({ userName: userData.userName });
 
-            bcrypt.compare(userData.password, users[0].password).then(match => {
-                if (!match) {
-                    reject(`Incorrect Password for user: ${userData.userName}`);
-                    return;
-                }
+        if (users.length === 0) {
+            throw `Unable to find user: ${userData.userName}`;
+        }
 
-                if (users[0].loginHistory.length === 8) {
-                    users[0].loginHistory.pop();
-                }
+        const match = await bcrypt.compare(userData.password, users[0].password);
 
-                users[0].loginHistory.unshift({
-                    dateTime: new Date(),
-                    userAgent: userData.userAgent
-                });
+        if (!match) {
+            throw `Incorrect Password for user: ${userData.userName}`;
+        }
 
-                User.updateOne(
-                    { userName: users[0].userName },
-                    { $set: { loginHistory: users[0].loginHistory } }
-                ).then(() => {
-                    resolve(users[0]);
-                }).catch(err => {
-                    reject("There was an error verifying the user: " + err);
-                });
+        if (users[0].loginHistory.length === 8) {
+            users[0].loginHistory.pop();
+        }
 
-            }).catch(() => {
-                reject("Error comparing passwords");
-            });
-        }).catch(() => {
-            reject(`Unable to find user: ${userData.userName}`);
+        users[0].loginHistory.unshift({
+            dateTime: new Date(),
+            userAgent: userData.userAgent
         });
-    });
+
+        await User.updateOne(
+            { userName: users[0].userName },
+            { $set: { loginHistory: users[0].loginHistory } }
+        );
+
+        return users[0];
+
+    } catch (err) {
+        console.error("Login error:", err);
+        if (typeof err === "string") {
+            throw err;
+        } else {
+            throw "There was an error verifying the user: " + err;
+        }
+    }
 };
