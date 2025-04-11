@@ -2,10 +2,23 @@ require('dotenv').config();
 require('pg');
 const { Sequelize, Op } = require('sequelize');
 
-const sequelize = new Sequelize(process.env.PG_CONNECTION_STRING, {
+const connectionString = process.env.PG_CONNECTION_STRING;
+
+if (!connectionString) {
+    throw new Error("PG_CONNECTION_STRING is undefined! Check Vercel environment variables.");
+}
+
+const sequelize = new Sequelize(connectionString, {
     dialect: 'postgres',
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    },
     logging: false
 });
+
 
 sequelize.authenticate()
     .then(() => console.log('Connected to the database successfully.'))
