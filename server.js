@@ -38,13 +38,13 @@ app.set("views", path.join(__dirname, "Views"));
 app.use(express.static(path.join(__dirname, "Public")));
 app.use(express.urlencoded({ extended: true }));
 
-// Session configuration
-app.use(clientSessions({
-    cookieName: "session",
-    secret: process.env.SESSION_SECRET,
-    duration: 2 * 60 * 1000,        
-    activeDuration: 1000 * 60       
-}));
+app.use(session({
+    cookieName: 'session',
+    secret: process.env.SESSION_SECRET, 
+    duration: 24 * 60 * 60 * 1000,
+    activeDuration: 1000 * 60 * 5
+  }));
+  
 
 // Expose session to all views
 app.use((req, res, next) => {
