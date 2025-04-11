@@ -193,8 +193,8 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
-app.get("/userHistory", ensureLogin, (req, res) => {
-    res.render("userHistory", { page: "/userHistory" });
+app.get("/userhistory", ensureLogin, (req, res) => {
+    res.render("userhistory", { page: "/userhistory" });
 });
 
 // --- Error handlers ---
